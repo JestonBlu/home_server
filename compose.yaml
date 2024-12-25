@@ -1,0 +1,39 @@
+services:
+  magicmirror:
+    container_name: magic_mirror
+    image: karsten13/magicmirror:latest
+    restart: unless-stopped
+    volumes:
+      - ../mounts/config:/opt/magic_mirror/config
+      - ../mounts/modules:/opt/magic_mirror/modules
+      - ../mounts/css:/opt/magic_mirror/css
+    ports:
+      - 8080:8080
+  
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    container_name: mealie_home
+    restart: always
+    volumes:
+      - mealie-data:/app/data/
+    ports:
+        - "9925:9000" # 
+    deploy:
+      resources:
+        limits:
+          memory: 1000M # 
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: America/Anchorage
+      BASE_URL: 192.168.0.18
+      DEFAULT_EMAIL: blubaughj@gmail.com
+      DEFAULT_GROUP: group
+      DEFAULT_HOUSEHOLD: blubaugh
+
+volumes:
+  mealie-data:
+
+
