@@ -13,61 +13,48 @@ services:
       - 8080:8080
 
 ##################################################
-  # mealie:
-  #   image: ghcr.io/mealie-recipes/mealie:latest
-  #   container_name: mealie_home
-  #   restart: always
-  #   volumes:
-  #     - mealie_data:/app/data/
-  #   ports:
-  #       - "9925:9000" # 
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         memory: 1000M # 
-  #   environment:
-  #     # Set Backend ENV Variables Here
-  #     ALLOW_SIGNUP: "false"
-  #     PUID: 1000
-  #     PGID: 1000
-  #     TZ: America/Chicago
-  #     BASE_URL: 192.168.0.18
-  #     DEFAULT_EMAIL: blubaughj@gmail.com
-  #     DEFAULT_GROUP: group
-  #     DEFAULT_HOUSEHOLD: blubaugh
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    container_name: mealie_home
+    restart: always
+    volumes:
+      - mealie_data:/app/data/
+    ports:
+        - "9925:9000" # 
+    deploy:
+      resources:
+        limits:
+          memory: 1000M # 
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: America/Chicago
+      BASE_URL: 192.168.0.250
+      DEFAULT_EMAIL: blubaughj@gmail.com
+      DEFAULT_GROUP: group
+      DEFAULT_HOUSEHOLD: blubaugh
 
 ##################################################
-  # heimdall:
-  #   image: lscr.io/linuxserver/heimdall:latest
-  #   container_name: heimdall
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=America/Chicago
-  #   volumes:
-  #     - heimdall_data:/opt/heimdall/heimdall
-  #     - ./config:/config
-  #   ports:
-  #     - 8006:80
-  #     - 406:443
-  #   restart: unless-stopped
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - heimdall_data:/opt/heimdall/heimdall
+      - ./config:/config
+    ports:
+      - 8006:80
+      - 406:443
+    restart: unless-stopped
 
 ##################################################
-  # portainer:
-  #   image: portainer/portainer-ce:latest
-  #   container_name: portainer
-  #   ports:
-  #     - 9111:80
-  #     - 407:443
-  #   volumes:
-  #     - portainer_data:/data
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   restart: unless-stopped
-
-##################################################
-# volumes:
-#   mealie_data:
-#   heimdall_data:
-#   portainer_data:
+volumes:
+  mealie_data:
+  heimdall_data:
 
 
