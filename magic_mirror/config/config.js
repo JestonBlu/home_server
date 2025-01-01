@@ -13,7 +13,9 @@
  */
 let config = {
 	address: "0.0.0.0",	    // Address to listen on, can be:
-							// - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+							// - "localhost", "127.0.0.1", ":
+							// 
+							// :1" to listen on loopback interface
 							// - another specific IPv4/6 to listen on a specific interface
 							// - "0.0.0.0", "::" to listen on any interface
 							// Default, when address config is left out or empty, is "localhost"
