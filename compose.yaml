@@ -3,7 +3,7 @@ services:
   magicmirror:
     container_name: magic_mirror
     image: karsten13/magicmirror:latest
-    restart: unless-stopped
+    restart: no
     user: root
     volumes:
       - ../home_server/magic_mirror/config:/opt/magic_mirror/config
@@ -16,7 +16,7 @@ services:
   mealie:
     image: ghcr.io/mealie-recipes/mealie:latest
     container_name: mealie_home
-    restart: always
+    restart: no
     volumes:
       - mealie_data:/app/data/
     ports:
@@ -50,7 +50,7 @@ services:
     ports:
       - 8006:80
       - 406:443
-    restart: unless-stopped
+    restart: no
 
 ##################################################
 volumes:
