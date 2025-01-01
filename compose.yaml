@@ -1,21 +1,23 @@
+##################################################
 services:
   magicmirror:
     container_name: magic_mirror
     image: karsten13/magicmirror:latest
     restart: unless-stopped
     volumes:
-      - ../mounts/config:/opt/magic_mirror/config
-      - ../mounts/modules:/opt/magic_mirror/modules
-      - ../mounts/css:/opt/magic_mirror/css
+      - /home/jeston/Github/magicmirror/mounts/config:/opt/magic_mirror/config
+      - /home/jeston/Github/magicmirror/mounts/modules:/opt/magic_mirror/modules
+      - /home/jeston/Github/magicmirror/mounts/css:/opt/magic_mirror/css
     ports:
       - 8080:8080
-  
+
+##################################################
   mealie:
     image: ghcr.io/mealie-recipes/mealie:latest
     container_name: mealie_home
     restart: always
     volumes:
-      - mealie-data:/app/data/
+      - mealie_data:/app/data/
     ports:
         - "9925:9000" # 
     deploy:
@@ -27,13 +29,44 @@ services:
       ALLOW_SIGNUP: "false"
       PUID: 1000
       PGID: 1000
-      TZ: America/Anchorage
+      TZ: America/Chicago
       BASE_URL: 192.168.0.18
       DEFAULT_EMAIL: blubaughj@gmail.com
       DEFAULT_GROUP: group
       DEFAULT_HOUSEHOLD: blubaugh
 
+##################################################
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - heimdall_data:/opt/heimdall/heimdall
+      - ./config:/config
+    ports:
+      - 8006:80
+      - 406:443
+    restart: unless-stopped
+
+##################################################
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - 9111:80
+      - 407:443
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+##################################################
 volumes:
-  mealie-data:
+  mealie_data:
+  heimdall_data:
+  portainer_data:
 
 
