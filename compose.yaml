@@ -13,28 +13,29 @@ services:
  #     - 8080:8080
 
 ##################################################
-  #mealie:
-  #  image: ghcr.io/mealie-recipes/mealie:latest
-  #  container_name: mealie_home
-  #  restart: no
-  #  volumes:
-  #    - mealie_data:/app/data/
-  #  ports:
-  #      - "9925:9000" # 
-  #  deploy:
-  #    resources:
-  #      limits:
-  #        memory: 1000M # 
-  #  environment:
-  #    # Set Backend ENV Variables Here
-  #    ALLOW_SIGNUP: "false"
-  #    PUID: 1000
-  #    PGID: 1000
-  #    TZ: America/Chicago
-  #    BASE_URL: 192.168.0.250
-  #    DEFAULT_EMAIL: blubaughj@gmail.com
-  #    DEFAULT_GROUP: group
-  #    DEFAULT_HOUSEHOLD: blubaugh
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    container_name: mealie_home
+    restart: no
+    volumes:
+      - mealie_data:/app/data/
+      - ../home_server/mealie/data:/app/data/data
+    ports:
+        - "9925:9000" # 
+    deploy:
+      resources:
+        limits:
+          memory: 1000M # 
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: America/Chicago
+      BASE_URL: 192.168.0.250
+      DEFAULT_EMAIL: blubaughj@gmail.com
+      DEFAULT_GROUP: group
+      DEFAULT_HOUSEHOLD: blubaugh
 
 ##################################################
   heimdall:
@@ -46,7 +47,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - heimdall_data:/opt/heimdall/heimdall
-      - ./config:/config
+      - ../home_server/config:/config
     ports:
       - 8006:80
       - 406:443
@@ -54,7 +55,7 @@ services:
 
 ##################################################
 volumes:
-  mealie_data:
+ # mealie_data:
   heimdall_data:
 
 
