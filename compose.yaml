@@ -1,40 +1,40 @@
 ##################################################
 services:
-  magicmirror:
-    container_name: magic_mirror
-    image: karsten13/magicmirror:latest
-    restart: no
-    user: root
-    volumes:
-      - ../home_server/magic_mirror/config:/opt/magic_mirror/config
-      - ../home_server/magic_mirror/modules:/opt/magic_mirror/modules
-      - ../home_server/magic_mirror/css:/opt/magic_mirror/css
-    ports:
-      - 8080:8080
+ # magicmirror:
+ #   container_name: magic_mirror
+ #   image: karsten13/magicmirror:latest
+ #   restart: no
+ #   user: root
+ #   volumes:
+ #     - ../home_server/magic_mirror/config:/opt/magic_mirror/config
+ #     - ../home_server/magic_mirror/modules:/opt/magic_mirror/modules
+ #     - ../home_server/magic_mirror/css:/opt/magic_mirror/css
+ #   ports:
+ #     - 8080:8080
 
 ##################################################
-  mealie:
-    image: ghcr.io/mealie-recipes/mealie:latest
-    container_name: mealie_home
-    restart: no
-    volumes:
-      - mealie_data:/app/data/
-    ports:
-        - "9925:9000" # 
-    deploy:
-      resources:
-        limits:
-          memory: 1000M # 
-    environment:
-      # Set Backend ENV Variables Here
-      ALLOW_SIGNUP: "false"
-      PUID: 1000
-      PGID: 1000
-      TZ: America/Chicago
-      BASE_URL: 192.168.0.250
-      DEFAULT_EMAIL: blubaughj@gmail.com
-      DEFAULT_GROUP: group
-      DEFAULT_HOUSEHOLD: blubaugh
+  #mealie:
+  #  image: ghcr.io/mealie-recipes/mealie:latest
+  #  container_name: mealie_home
+  #  restart: no
+  #  volumes:
+  #    - mealie_data:/app/data/
+  #  ports:
+  #      - "9925:9000" # 
+  #  deploy:
+  #    resources:
+  #      limits:
+  #        memory: 1000M # 
+  #  environment:
+  #    # Set Backend ENV Variables Here
+  #    ALLOW_SIGNUP: "false"
+  #    PUID: 1000
+  #    PGID: 1000
+  #    TZ: America/Chicago
+  #    BASE_URL: 192.168.0.250
+  #    DEFAULT_EMAIL: blubaughj@gmail.com
+  #    DEFAULT_GROUP: group
+  #    DEFAULT_HOUSEHOLD: blubaugh
 
 ##################################################
   heimdall:
