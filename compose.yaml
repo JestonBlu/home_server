@@ -55,7 +55,7 @@ services:
 
 ##################################################
 volumes:
- # mealie_data:
+  mealie_data:
   heimdall_data:
 
 
