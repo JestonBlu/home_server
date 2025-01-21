@@ -1,2 +1,3 @@
-config/
-magic_mirror/modules/MMM-*
+config/heimdall/*
+config/magic_mirror/modules/*
+config/magic_mirror/css/*
